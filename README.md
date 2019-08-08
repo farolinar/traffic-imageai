@@ -1,6 +1,6 @@
-# Traffic Detection System
+# Traffic Detection System (TDS)
 
-TMS is a traffic management system that maps all the vehicles to the map.
+TDS is a traffic detaction system that detects all the vehicles in a video stream from CCTV.
 The code uses ImageAI (https://github.com/OlafenwaMoses/ImageAI).
 
 ## How to Use
@@ -52,6 +52,7 @@ File vid-cap-thread.py is a version of vid-cap.py which uses threading for the s
    ```
 
 1. Go to localhost:3000/client.
+
 
 ## Problem
    ```
