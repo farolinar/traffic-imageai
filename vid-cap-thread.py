@@ -6,7 +6,7 @@ import threading
 import eventlet
 import socketio
 
-sio = socketio.Server()
+sio = socketio.Server(ping_timeout=10)
 app = socketio.WSGIApp(sio, static_files={
     '/': {'content_type': 'text/html', 'filename': 'index.html'}
 })
@@ -50,10 +50,7 @@ class myThread (threading.Thread):
 # use this decorator, passing in the name of the
 # event we wish to listen out for
 def forFrame(frame_number, output_array, output_count, returned_frame):
-    # return returned_frame
-    # sio.emit('python-message', 'aku python', namespace='/chat') # gpp
-    sio.emit('reply', 'aku python', namespace='/chat')
-    # sio.emit('python-message', returned_frame) # gpp
+    sio.emit('reply', returned_frame, namespace='/chat')
 
 def init_socket():
     print("Starting socket...")

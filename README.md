@@ -35,6 +35,7 @@ Use the terminal or an Anaconda Prompt for the following steps:
 ### Detecting the vehicles
 
 The trial can use webcam (or video file, change the vid-cap.py or vid-cap-thread.py, read: https://imageai.readthedocs.io/en/latest/video/index.html).
+File vid-cap-thread.py is a version of vid-cap.py which uses threading for the socket communication (important).
 
 1. Go to the root folder.
 
@@ -43,4 +44,17 @@ The trial can use webcam (or video file, change the vid-cap.py or vid-cap-thread
    ```
    python vid-cap-thread.py
    ```
- 
+
+1. Open another terminal and run the NodeJS.
+
+   ```
+   node index.js
+   ```
+
+1. Go to localhost:3000/client.
+
+## Problem
+   ```
+   Received a broken close frame containing invalid UTF-8.
+   ```
+

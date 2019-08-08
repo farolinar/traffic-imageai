@@ -1,4 +1,3 @@
-
 from imageai.Detection import VideoObjectDetection
 import os
 import cv2
@@ -24,28 +23,12 @@ HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 8080       # Port to listen on (non-privileged ports are > 1023)
 
 
-# # creates a new Async Socket IO Server
-# sio = socketio.AsyncServer()
-# # Creates a new Aiohttp Web Application
-# app = web.Application()
-# # Binds our Socket.IO server to our Web App
-# # instance
-# sio.attach(app)
-
-
 # If we wanted to create a new websocket endpoint,
 # use this decorator, passing in the name of the
 # event we wish to listen out for
 def forFrame(frame_number, output_array, output_count, returned_frame):
-    # return returned_frame
-    sio.emit('python-message', 'aku python', namespace='/chat') # gpp
-    # sio.emit('python-message', returned_frame) # gpp
+    sio.emit('reply', returned_frame, namespace='/chat')
 
-# #BERHASIL
-# @sio.on('chat message', namespace='/chat')
-# async def print_message(sid, data):
-#     # print("server received message!", data)
-#     await sio.emit('reply', 'aku python', namespace='/chat')
 
 # We kick off our server
 if __name__ == '__main__':

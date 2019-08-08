@@ -35,91 +35,24 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <!-- <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
         
         <script>
             // get img dom element
             const img = document.querySelector('img');
 
-            // var socket = io.connect('http://localhost:3003');
-            // socket = io.connect('http://0.0.0.0:8080');
-            // var socket = io.connect('http://localhost');
-            // socket.on('news', function (data) {
-            //     console.log(data);
-            //     socket.emit('my osther event', { my: 'data' });
-            // });
-
-            // BERHASIL
             var socket = io("http://localhost:8080/chat");
 
-            socket.on('reply', function(msg){console.log('reply!', msg)});
+            // socket.on('reply', function(msg){console.log('reply!', msg)});
+            socket.on('reply', function(msg){img.src = msg; });
 
             $(document).ready(function(){
                 // send it to the server
-                socket.emit('chat message', 'to the moon');
+                socket.emit('chat message', 'client ready');
 
             });
-            //BERHASILATAS
-
-            // $(function () {
-                // var socket = io("http://localhost:8080");
-                
-                // sockets.on('connection', function (socket) {
-                //     socket.send('to the moon');
-                // });
-                // socket.emit('python-message', 'to the moon');
-                // sockets.on('python-message', function)
-                // sockets.on('connection', function (socket) {
-                //     socket.emit('python-message', 'to the moon');
-                // });
-                // socket.on("connection", function(conn){
-                //     conn.on( "python-message", function( msg ) {
-                //         // img.src = msg;
-                //         console.log('Received: ' + msg);
-                //     });
-                // });
-
-                // socket.on( "python-message", function( msg ) {
-                //     // img.src = msg;
-                //     console.log('Received: ' + msg);
-                // });
-                
-            // });
-            // socket.on('python-message',function(data) {
-            //     console.log('Received a message from the server!',data);
-            // });
-            // var socket = io();
-            // socket.on( "python-message", function( fromPython ) {
-            //     console.log( fromPython );
-            // });
-            // socket.on( "connection", function( httpsocket ) {
-            //     httpsocket.on( 'python-message', function( fromPython ) {
-            //         // httpsocket.broadcast.emit( 'message', fromPython );
-            //         console.log( fromPython );
-            //     });
-            // });
-            // // socket.on('news', function (data) {
-            // //     console.log(data);
-            // //     socket.emit('my other event', { my: 'data' });
-            // // });
-            // // var express = require( "express" );
-            // // var app = express();
-            // // var http = require( "http" );
-            // // app.use( express.static( "./public" ) ); // where the web page code goes
-            // // var http_server = http.createServer( app ).listen( 3000 );
-            // // var http_io = require( "socket.io" )( http_server );
-
-            
-            
-            // const WS_URL = 'ws://127.0.0.1:8080';
-            // const ws = new WebSocket(WS_URL);
-            // ws.onopen = () => console.log(`Connected to ${WS_URL}`);
-            // ws.onmessage = message => {
-            //     // set the base64 string to the src tag of the image
-            //     console.log(message.data);
-            //     // img.src = message.data;
-            // }
 
         </script>
     </body>
