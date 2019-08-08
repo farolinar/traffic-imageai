@@ -1,0 +1,66 @@
+
+<html>
+    <head>
+        <title>Streamer</title>
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/flexing.css">
+        <link rel="stylesheet" href="/css/layout.css">
+    </head>
+    <body>
+        <div class="header">
+            <a href="/" class="logo">Traffic</a>
+            <div class="header-right">
+                <a href="/">Home</a>
+                <a class="active" href="streamer">Streamer</a>
+                <a href="client">Client</a>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="box">
+                <div class="left">
+                    <h3>Streamer</h3>
+                    <p align="justify">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu ullamcorper felis. 
+                            Donec eget eleifend augue. Curabitur posuere ultricies euismod. In scelerisque magna tellus, 
+                            quis dignissim nulla varius eget. Proin ac ultrices justo. Sed a odio quis dui aliquet mollis. 
+                            Nam egestas ultricies nunc et cursus. Cras ullamcorper ut nulla laoreet porta. Maecenas vulputate 
+                            pulvinar vestibulum. Morbi rhoncus varius elit. Aliquam in sollicitudin mauris. Phasellus auctor 
+                            lectus vitae sodales viverra. Integer et facilisis lacus, quis euismod nunc. Mauris porttitor turpis 
+                            sed posuere condimentum. Morbi fermentum luctus erat, a egestas tellus.
+                    </p>
+                </div>
+                <div class="right">
+                    <video autoplay></video>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // get video dom element
+            // const video = document.querySelector('video');
+            
+            // // request access to webcam
+            // navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+            
+            // // returns a frame encoded in base64
+            // const getFrame = () => {
+            //     const canvas = document.createElement('canvas');
+            //     canvas.width = video.videoWidth;
+            //     canvas.height = video.videoHeight;
+            //     canvas.getContext('2d').drawImage(video, 0, 0);
+            //     const data = canvas.toDataURL('image/png');
+            //     return data;
+            // }
+            // const WS_URL = 'ws://localhost:3001';
+            // const FPS = 3;
+            // const ws = new WebSocket(WS_URL);
+            // ws.onopen = () => {
+            //     console.log(`Connected to ${WS_URL}`);
+            //     setInterval(() => {
+            //         ws.send(getFrame());
+            //     }, 1000 / FPS);
+            // }
+        </script>
+    </body>
+    </html>
