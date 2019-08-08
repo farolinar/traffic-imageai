@@ -1,4 +1,4 @@
-# Traffic Management System (TMS): A Data Science Analysis Project
+# Traffic Detection System
 
 TMS is a traffic management system that maps all the vehicles to the map.
 The code uses ImageAI (https://github.com/OlafenwaMoses/ImageAI).
@@ -10,58 +10,37 @@ The code uses ImageAI (https://github.com/OlafenwaMoses/ImageAI).
 1. Clone this repository
 
    ```
-   git clone https://github.com/72ridwan/tms.git
-   cd tms
+   git clone https://github.com/farolinar/traffic-imageai.git
    ```
    
-1. [Download](https://drive.google.com/open?id=1C3YkvLjn0MWFccc8n9feT2mxrJKs4fDB) the YOLOv3 pre-trained weights data to `darknet` folder.
+1. [Download](https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/resnet50_coco_best_v2.0.1.h5) the RetinaNet model file that will be used for object detection.
 
-1. Download the CCTV data and the maps [from this drive](https://drive.google.com/open?id=11upryL7cOCL8uRIXiJTw1mxLaRUjttm3). Extract the ZIP content to `tms` or root folder.
+### Preparing the environment
 
-1. Go to `darknet` folder and compile the C source code
+Use the terminal or an Anaconda Prompt for the following steps:
+
+1. Create the conda environment from the environment.yml file:
+
    ```
-   cd darknet
-   make
+   conda env create -f environment.yml
    ```
+
+1. Create the conda environment from the environment.yml file:
+
+   ```
+   conda activate traffic
+   ```
+
 
 ### Detecting the vehicles
 
-Due to the time constraint of this project, we will be focusing only to detect
-the vehicles in CCTV of Simpang 5 Patung Kuda Selatan at 12:00.
-The video is located in `cctv/SIMPANG 4 PATUNG KUDA`.
+The trial can use webcam (or video file, change the vid-cap.py or vid-cap-thread.py, read: https://imageai.readthedocs.io/en/latest/video/index.html).
 
 1. Go to the root folder.
 
-1. Run the `Pre-processing.ipynb` Jupyter notebook.
+1. Run the vid-cap-thread.py.
 
-1. In the Linux environment, run `detect_and_save.py` to begin detection.
-   You can pass the argument to resume the detection from certain frame name
-   shall the process was terminated in the middle.
    ```
-   python3 detect_and_save.py --start "0000006.jpg" --file_type "jpg" \
-     --folder_path="../frame/cctv_SIMPANG 4 PATUNG KUDA_patungkuda selatan 1200_x264.mp4"
+   python vid-cap-thread.py
    ```
-   
-### Other configurations
-
-- ##### Operating on GPU
-  Currently, this setup is made for CPU purposes and has not been tested on GPU using CUDNN.
-  We have not implemented it due to environment complexity, especially on Windows.
-
-- ##### Better CPU utilization
-  The default setting is setup for normal CPU utilization. To add more CPU utilization,
-  you can add multiprocessing technique by going to `Makefile` and change the line
-  `OPENMP=0` to `OPENMP=1`.
-
-## Developers
-
-- Agas Yanpratama (1606918396)
-- Fardhan Dhiadribratha Sudjono (1606918332)
-- Luqman Iffan Windrawan (1606876090)
-- Muhammad Yudistira Hanifmuti (1606829560)
-- Rachmat Ridwan (1606886974)
-
-## Special Thanks
-
-We would like to thank our lecturers, Mr. Ari Wibisono and Mr. Ivan Fanany, especially
-Mr. Ari who had been giving us advices, the datasets, and the resources for this project."# traffic-imageai" 
+ 
