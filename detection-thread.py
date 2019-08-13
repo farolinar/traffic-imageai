@@ -1,12 +1,13 @@
 from imageai.Detection import VideoObjectDetection
 import os
-import cv2
 import threading
 
 import eventlet
 import socketio
 
-sio = socketio.Server(ping_timeout=10)
+from vid_cap import VideoCap
+
+sio = socketio.Server(ping_timeout=10, binary=True)
 app = socketio.WSGIApp(sio, static_files={
     '/': {'content_type': 'text/html', 'filename': 'index.html'}
 })
@@ -34,7 +35,7 @@ class myThread (threading.Thread):
             print("Wrong category")
 
     def run(self):
-        print("Starting " + self.name)
+        print("Starting thread " + self.name)
         # Get lock to synchronize threads
         # threadLock.acquire()
         if self.category == 1:
@@ -42,7 +43,7 @@ class myThread (threading.Thread):
         elif self.category == 2:
             sender()
         else:
-            print("Wrong category")
+            print("Wrong thread category")
         # Free lock to release next thread
         # threadLock.release()
 
@@ -50,7 +51,13 @@ class myThread (threading.Thread):
 # use this decorator, passing in the name of the
 # event we wish to listen out for
 def forFrame(frame_number, output_array, output_count, returned_frame):
-    sio.emit('reply', returned_frame, namespace='/chat')
+    # sio.emit('reply', returned_frame, namespace='/chat')
+    print("forFrame "+ str(frame_number))
+    # sio.emit('reply', 'aku python', namespace='/chat')
+    serialized_data = pickle.dumps(returned_frame)
+    sio.emit('reply', serialized_data, namespace='/chat')
+    # sio.emit('reply', str(frame_number), namespace='/chat')
+    return returned_frame
 
 def init_socket():
     print("Starting socket...")
@@ -64,7 +71,8 @@ def sender():
     # video_detector.setModelPath(os.path.join(execution_path, "v2.h5"))
     video_detector.loadModel()
 
-    camera = cv2.VideoCapture(0)
+    vidcap = VideoCap()
+    camera = vidcap.camera()
     video_path = video_detector.detectObjectsFromVideo(camera_input=camera, save_detected_video = False,
         frames_per_second=20, log_progress=True, minimum_percentage_probability=30, per_frame_function=forFrame,
         return_detected_frame=True)

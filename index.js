@@ -4,10 +4,10 @@ const express = require('express');
 const WebSocket = require('ws');
 const app = express();
 
-const WS_PORT = process.env.WS_PORT || 3001;
+// const WS_PORT = process.env.WS_PORT || 3001;
 const HTTP_PORT = process.env.HTTP_PORT || 3000;
 
-const wsServer = new WebSocket.Server({ port: WS_PORT }, () => console.log(`WS server is listening at ws://localhost:${WS_PORT}`));
+// const wsServer = new WebSocket.Server({ port: WS_PORT }, () => console.log(`WS server is listening at ws://localhost:${WS_PORT}`));
 
 // array of connected websocket clients
 let connectedClients = [];
@@ -60,4 +60,4 @@ app.use(express.static(__dirname + '/static'));
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, './home.html')));
 app.get('/client', (req, res) => res.sendFile(path.resolve(__dirname, './client.html')));
 app.get('/streamer', (req, res) => res.sendFile(path.resolve(__dirname, './streamer.html')));
-app.listen(HTTP_PORT, () => console.log(`HTTP server listening at http://localhost:${HTTP_PORT}`));
+app.listen(HTTP_PORT, () => console.log(`Client listening at http://localhost:8080/chat`));

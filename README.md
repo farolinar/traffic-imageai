@@ -31,18 +31,30 @@ Use the terminal or an Anaconda Prompt for the following steps:
    conda activate traffic
    ```
 
+1. Install eventlet module for the socket:
+
+   ```
+   conda install -c conda-forge eventlet
+   ```
+
+1. Install express (for NodeJS purpose):
+
+   ```
+   npm -i -S express
+   ```
+
 
 ### Detecting the vehicles
 
-The trial can use webcam (or video file, change the vid-cap.py or vid-cap-thread.py, read: https://imageai.readthedocs.io/en/latest/video/index.html).
-File vid-cap-thread.py is a version of vid-cap.py which uses threading for the socket communication (important).
+The trial can use webcam (or video file, change the detection.py or detection-thread.py, read: https://imageai.readthedocs.io/en/latest/video/index.html).
+File detection-thread.py is a version of detection.py which uses threading for the socket communication (important).
 
 1. Go to the root folder.
 
-1. Run the vid-cap-thread.py.
+1. Run the detection-thread.py.
 
    ```
-   python vid-cap-thread.py
+   python detection-thread.py
    ```
 
 1. Open another terminal and run the NodeJS.

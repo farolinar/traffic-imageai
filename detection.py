@@ -1,6 +1,6 @@
 from imageai.Detection import VideoObjectDetection
 import os
-import cv2
+from vid_cap import VideoCap
 
 # from aiohttp import web
 # import socketio
@@ -41,7 +41,8 @@ if __name__ == '__main__':
     # video_detector.setModelPath(os.path.join(execution_path, "v2.h5"))
     video_detector.loadModel()
 
-    camera = cv2.VideoCapture(0)
+    vidcap = VideoCap()
+    camera = vidcap.camera()
     video_path = video_detector.detectObjectsFromVideo(camera_input=camera, save_detected_video = False,
         frames_per_second=20, log_progress=True, minimum_percentage_probability=30, per_frame_function=forFrame,
         return_detected_frame=True)

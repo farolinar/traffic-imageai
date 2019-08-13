@@ -16,7 +16,7 @@ class myThread (threading.Thread):
         elif self.category == 2:
             self.name = "Sender"
         else:
-            print("Wrong category")
+            print("Wrong thread category")
 
     def run(self):
         print("Starting " + self.name)
@@ -25,22 +25,26 @@ class myThread (threading.Thread):
         if self.category == 1:
             init_socket()
         elif self.category == 2:
-            print("Check cat 2")
             sender()
         else:
-            print("Wrong category")
+            print("Wrong thread category")
         # Free lock to release next thread
         # threadLock.release()
 
 def init_socket():
-    print("Starting...")
+    print("Starting socket...")
     eventlet.wsgi.server(eventlet.listen(('', 8080)), app)
 
 def sender():
+    # for sending image
+    image_data = 'No image'
+    with open('my_image_file.jpg', 'rb') as f:
+        print('Image exist')
+        image_data = f.read()
+    print(type(image_data))
     while True:
-        print("Check 1")
-        sio.emit('reply', 'aku python', namespace='/chat')
-        print("Check 2")
+        sio.emit('reply', image_data, namespace='/chat')
+        # sio.emit('reply', 'aku python', namespace='/chat')
 
 # threadLock = threading.Lock()
 # threads = []
