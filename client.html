@@ -8,12 +8,12 @@
     </head>
     <body>
         <div class="header">
-            <a href="/" class="logo">Traffic</a>
-            <div class="header-right">
+            <a href="/" class="logo">Traffic Detection System</a>
+            <!-- <div class="header-right">
                 <a href="/">Home</a>
                 <a href="streamer">Streamer</a>
                 <a class="active" href="client">Client</a>
-            </div>
+            </div> -->
         </div>
 
         <div class="body">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="right">
                     <!-- <canvas width="426" height="240"></canvas> -->
-                    <img src="" width="426" height="240">
+                    <img src="">
                 </div>
             </div>
         </div>
@@ -50,7 +50,9 @@
             socket.on('reply', function(msg){
                 var arrayBuffer = msg;
                 var bytes = new Uint8Array(arrayBuffer);
-
+                
+                img.width = '426';
+                img.height = '240';
                 img.src = 'data:image/png;base64,'+encode(bytes);
                 console.log(msg);
             });

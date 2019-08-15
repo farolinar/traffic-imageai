@@ -5,7 +5,13 @@ import threading
 import eventlet
 import socketio
 
+# from matplotlib import pyplot as plt
+
 from vid_cap import VideoCap
+
+
+url = 'redis://hostname:port/0'
+# sio = socketio.Server(client_manager=socketio.RedisManager(url))
 
 sio = socketio.Server(ping_timeout=10, binary=True)
 app = socketio.WSGIApp(sio, static_files={
@@ -54,10 +60,10 @@ def forFrame(frame_number, output_array, output_count, returned_frame):
     # sio.emit('reply', returned_frame, namespace='/chat')
     print("forFrame "+ str(frame_number))
     # sio.emit('reply', 'aku python', namespace='/chat')
-    serialized_data = pickle.dumps(returned_frame)
-    sio.emit('reply', serialized_data, namespace='/chat')
+    # serialized_data = pickle.dumps(returned_frame)
+    sio.emit('reply', 'aku python', namespace='/chat')
     # sio.emit('reply', str(frame_number), namespace='/chat')
-    return returned_frame
+    # return returned_frame
 
 def init_socket():
     print("Starting socket...")

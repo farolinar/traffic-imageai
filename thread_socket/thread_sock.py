@@ -1,6 +1,13 @@
 import threading
 import eventlet
 import socketio
+import random
+
+import os
+import sys
+import time
+
+from datetime import datetime
 
 sio = socketio.Server()
 app = socketio.WSGIApp(sio, static_files={
@@ -11,6 +18,7 @@ class myThread (threading.Thread):
     def __init__(self, category):
         threading.Thread.__init__(self)
         self.category = category
+        self._is_running = True
         if self.category == 1:
             self.name = "InitSocket"
         elif self.category == 2:
@@ -19,7 +27,8 @@ class myThread (threading.Thread):
             print("Wrong thread category")
 
     def run(self):
-        print("Starting " + self.name)
+        # while(self._is_running):
+        print("Starting thread " + self.name)
         # Get lock to synchronize threads
         # threadLock.acquire()
         if self.category == 1:
@@ -31,6 +40,11 @@ class myThread (threading.Thread):
         # Free lock to release next thread
         # threadLock.release()
 
+    def stop(self):
+        self._is_running = False
+
+
+
 def init_socket():
     print("Starting socket...")
     eventlet.wsgi.server(eventlet.listen(('', 8080)), app)
@@ -38,12 +52,24 @@ def init_socket():
 def sender():
     # for sending image
     image_data = 'No image'
-    with open('my_image_file.jpg', 'rb') as f:
-        print('Image exist')
-        image_data = f.read()
+    images = []
+    
+    for filename in os.listdir('.'):
+        if filename.endswith(".jpg") or filename.endswith(".png"): 
+            with open(filename, 'rb') as f:
+                print('Image exists')
+                image_data = f.read()
+                images.append(image_data)
     print(type(image_data))
+
     while True:
+        # image_data = random.choice(list(enumerate(images)))
+        # print('Sending image ' + str(image_data[0]))
+        image_data = random.choice(images)
         sio.emit('reply', image_data, namespace='/chat')
+        print('Image sent')
+        # eventlet.sleep(5)
+        # sio.sleep(5)
         # sio.emit('reply', 'aku python', namespace='/chat')
 
 # threadLock = threading.Lock()
@@ -52,6 +78,15 @@ def sender():
 # Create new threads
 threadInit = myThread(1)
 threadSender = myThread(2)
+
+# def exitfunc():
+#     threadInit.stop()
+#     threadSender.stop()
+#     print("Exit Time ", datetime.now())
+#     print("Exiting Main Thread")
+#     # sys.exit(0)
+
+# threading.Timer(300, exitfunc).start() # exit in 5 minutes
 
 # Start new Threads
 threadInit.start()
@@ -64,4 +99,3 @@ threadSender.start()
 # # Wait for all threads to complete
 # for t in threads:
 #     t.join()
-print("Exiting Main Thread")

@@ -31,6 +31,18 @@ Use the terminal or an Anaconda Prompt for the following steps:
    conda activate traffic
    ```
 
+1. Install ImageAI:
+
+   ```
+   pip install https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.3/imageai-2.0.3-py3-none-any.whl
+   ```
+
+1. Install python-socketio:
+
+   ```
+   conda install -c conda-forge python-socketio
+   ```
+
 1. Install eventlet module for the socket:
 
    ```
