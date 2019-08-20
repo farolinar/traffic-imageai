@@ -66,9 +66,11 @@ def sender():
         # image_data = random.choice(list(enumerate(images)))
         # print('Sending image ' + str(image_data[0]))
         image_data = random.choice(images)
+        time.sleep(10)
         sio.emit('reply', image_data, namespace='/chat')
         print('Image sent')
         # eventlet.sleep(5)
+        # time.sleep(1)
         # sio.sleep(5)
         # sio.emit('reply', 'aku python', namespace='/chat')
 
