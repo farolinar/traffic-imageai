@@ -83,3 +83,8 @@ File detection-thread.py is a version of detection.py which uses threading for t
    Received a broken close frame containing invalid UTF-8.
    ```
 
+### Solution
+   ```
+   Save about 30 frames, detect them, then delete them (Not real-time).
+   ```
+
