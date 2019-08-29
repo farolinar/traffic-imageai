@@ -66,7 +66,7 @@ def sender():
         # image_data = random.choice(list(enumerate(images)))
         # print('Sending image ' + str(image_data[0]))
         image_data = random.choice(images)
-        time.sleep(10)
+        # time.sleep(10)
         sio.emit('reply', image_data, namespace='/chat')
         print('Image sent')
         # eventlet.sleep(5)
